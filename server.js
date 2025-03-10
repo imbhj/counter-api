@@ -13,7 +13,7 @@ app.use(cors());
 app.get('/', async (req, res) => {
   res.send('hello! aws');
 });
-
+// http://3.3.333:3005/counter
 app.get('/counter', async (req, res) => {
   try {
     const result = await Counter.findOne({
@@ -24,6 +24,16 @@ app.get('/counter', async (req, res) => {
     console.log(error);
   }
 });
+
+app.post("/counter", async(req, res) => {
+  try {
+      const { newValue } = req.body      
+      const newCounter = await Counter.create({value: newValue});
+      res.json({ value: newCounter.value });
+  } catch (error) {
+      console.log(error);
+  }
+})
 
 app.listen(PORT, async () => {
   await sequelize.sync({ force: true });
