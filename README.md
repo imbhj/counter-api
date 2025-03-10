@@ -1,37 +1,24 @@
-## 외부모듈 설치
+## 백 서버 디렉토리 설정
+
+### counter-api 디렉토리 따로 생성
+
+- blockchain11
+- counter-api
+
+동일 선상에 counter-api 디렉토리 생성
+
+### 해당 디렉토리 엽니다.
 
 ```sh
-npm init -y
-npm install express mysql2 sequelize cors dotenv
+mkdir counter-api
+cd counter-api
+code .
 ```
 
-### config.js 작성
+### git clone (내(교강사)꺼 git clone뜨라는게 아니야^^)
 
-```js
-require('dotenv').config();
+여러분 fork했죠? 해당 레포지토리 git clone 뜨라는거야
 
-const config = {
-    env: process.env.NODE_ENV || "development",
-    port: process.env.PORT || 3000,
-    db: {
-        development: {
-            username: process.env.DB_USER || '',
-            password: process.env.DB_PASSWORD || '',
-            database: process.env.DB_DATABASE || '',
-            port: process.env.DB_PORT || '',
-            host: process.env.DB_HOST || '',
-            dialect: 'mysql',
-        }
-    }
-}
-
-module.exports = config;
+```sh
+git clone [여러분fork주소] .
 ```
-
-### model/counter.model.js
-
-```js
-
-```# counter-api
-# counter-api
-# counter-api
