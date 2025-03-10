@@ -1,19 +1,19 @@
+require('dotenv').config();
+const cors = require('cors');
 const express = require('express');
-const app = express();
-const PORT = process.env.PORT || 3005;
 const { Counter, sequelize } = require('./model');
+const app = express();
+
+const PORT = process.env.PORT || 3005;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-require('dotenv').config();
-const cors = require('cors');
 app.use(cors());
 
 app.get('/', async (req, res) => {
   res.send('hello! aws');
 });
-// http://3.3.333:3005/counter
+
 app.get('/counter', async (req, res) => {
   try {
     const result = await Counter.findOne({
@@ -38,8 +38,8 @@ app.post("/counter", async(req, res) => {
 app.listen(PORT, async () => {
   await sequelize.sync({ force: true });
 
-  (await Counter.findOne({ where: { id: 1 } })) ||
-    (await Counter.create({ id: 1, value: 0 }));
+  await Counter.findOne({ where: { id: 1 } }) ||
+  await Counter.create({ id: 1, value: 0 });
 
   console.log(`server start ${PORT}`);
 });

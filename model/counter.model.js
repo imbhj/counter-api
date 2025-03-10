@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define("counter", {
-        value: {
+        count: {
             type: DataTypes.INTEGER,
             allowNull: false
         }
