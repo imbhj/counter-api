@@ -14,7 +14,7 @@ app.get('/', async (req, res) => {
   res.send('hello! aws');
 });
 
-app.get('/api/counter', async (req, res) => {
+app.get('/counter', async (req, res) => {
   try {
     const result = await Counter.findOne({
       order: [['id', 'DESC']],
@@ -25,7 +25,7 @@ app.get('/api/counter', async (req, res) => {
   }
 });
 
-app.post("/api/counter", async(req, res) => {
+app.post("/counter", async(req, res) => {
   try {
       const { newValue } = req.body      
       const newCounter = await Counter.create({value: newValue});
