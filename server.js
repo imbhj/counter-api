@@ -44,10 +44,8 @@ app.delete("/counter", async(req, res) => {
       truncate: true
     });
     console.log(reset);
-    
+
     res.json(reset)
-   
-    
   } catch (error) {
       console.log(error);
   }
