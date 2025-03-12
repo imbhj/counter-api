@@ -5,7 +5,6 @@ const { Counter, sequelize } = require('./model');
 const app = express();
 
 const PORT = process.env.PORT || 3005;
-const { Counter, sequelize } = require('./model');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
