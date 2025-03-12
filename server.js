@@ -1,13 +1,14 @@
+require('dotenv').config();
+const cors = require('cors');
 const express = require('express');
+const { Counter, sequelize } = require('./model');
 const app = express();
+
 const PORT = process.env.PORT || 3005;
 const { Counter, sequelize } = require('./model');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-require('dotenv').config();
-const cors = require('cors');
 app.use(cors());
 
 app.get('/', async (req, res) => {
@@ -25,21 +26,24 @@ app.get('/counter', async (req, res) => {
   }
 });
 
-app.post('/counter', async (req, res) => {
+
+app.post("/counter", async(req, res) => {
   try {
-    const { newValue } = req.body;
-    const newCounter = await Counter.create({ value: newValue });
-    res.json({ success: true, value: newCounter.value });
+      const { newValue } = req.body      
+      const newCounter = await Counter.create({value: newValue});
+      res.json({ value: newCounter.value });
   } catch (error) {
-    console.log(error);
+      console.log(error);
   }
-});
+})
+
 
 app.listen(PORT, async () => {
   await sequelize.sync({ force: true });
 
-  (await Counter.findOne({ where: { id: 1 } })) ||
-    (await Counter.create({ id: 1, value: 0 }));
+
+  await Counter.findOne({ where: { id: 1 } }) ||
+  await Counter.create({ id: 1, value: 0 });
 
   console.log(`server start ${PORT}`);
 });
